@@ -1,0 +1,117 @@
+<!--
+  @description       : HTML code to show the data to the end user.
+  @author            : Akshay S
+-->
+<template>
+    <div class="slds-form_horizontal slds-scrollable_y slds-form slds-grid slds-wrap">
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="Required XB Service" value={xbservicevalue}
+                    read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="XB Sales Channel" value={xbsaleschannelvalue}
+                    read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="Origin Country(XB)" value={origincountryvalue}
+                    read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="Destination Country(XB)" value={destinationcountryvalue}
+                    read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="B2B/B2C" value={b2bb2cvalue} read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="Freight Mode(XB)" value={freightmodexbvalue}
+                    read-only></lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="text" label="COD/Non-COD" value={codvalue} read-only
+                   ></lightning-input>
+            </div>
+        </div>
+        <template if:true={makeE2ERateTierrequired}>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-combobox name="handleE2ERateTier" label="E2E Rate Tier" placeholder="Select E2E Rate Tier"
+                    options={E2ERateTierFilterOptions} onchange={handleComboboxChange} value={E2ERateTierValue}
+                    required={makeE2ERateTierrequired} class="E2ERateTier" read-only={ReadOnly}></lightning-combobox>
+            </div>
+        </div>
+        </template>
+        <template if:true={makeLMRateTierrequired}>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-combobox name="handleLMRateTier" label="LM Rate Tier" placeholder="Select LM Rate Tier"
+                    value={LMRateTierValue} options={LMRateTierOptions} onchange={handleComboboxChange}
+                    required={makeLMRateTierrequired} class="LMRateTier" read-only={ReadOnly}></lightning-combobox>
+            </div>
+        </div>
+        </template>
+        <template if:true={makeCODRequired}>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-combobox name="handleCODRateTier" label="COD Rate Tier" placeholder="Select COD Rate Tier"
+                    options={CODFilterOptions} onchange={handleComboboxChange} required={makeCODRequired}
+                    value={CODRateTierValue} class="CODRateTier" read-only={ReadOnly}></lightning-combobox>
+            </div>
+        </div>
+        </template> 
+        <template if:true={makeLMSolutionTyperequired}>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-combobox name="handleLMSolutionType" label="LM Solution Type"
+                    placeholder="Select LM Solution Type" options={LMFilterOptions} onchange={handleComboboxChange}
+                    value={LMSolutionValue} required={makeLMSolutionTyperequired}
+                    class="LMSolutionType" read-only={ReadOnly}></lightning-combobox>
+            </div>
+        </div>
+        </template>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-input type="date" name="handleQuoteDate" label="Quote Date" class="QuoteDate"
+                    value={QuoteDateValue} onchange={handleComboboxChange} required=true read-only={ReadOnly}>
+                </lightning-input>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-combobox name="handleFMPickupValue" label="Include FM Pickup Rate Card"
+                    placeholder="Select Include FM Pickup Rate Card" options={FMPickup}
+                    value={FMPickValue} onchange={handleComboboxChange} read-only={ReadOnly}
+                    ></lightning-combobox>
+            </div>
+        </div>
+    </div>
+        <div class="slds-form_horizontal slds-scrollable_y slds-form slds-grid slds-wrap">
+        <div class="slds-size_1-of-2">
+            <div class="slds-box slds-box_x-small slds-m-around_x-small">
+                <lightning-button variant="brand-outline" disabled={makedisablegeneratecardbutton} label="Generate Rate Card" onclick={handleSubmit}
+                    class="slds-align_absolute-center"></lightning-button>
+            </div>
+        </div>
+    </div>
+    <div class="slds-card slds-scrollable">
+            <div class="slds-grid slds-grid_vertical">           
+                <div class="slds-col slds-card slds-scrollable_x" lwc:if={E2ERateData}>
+                    <c-custom-matrix lwc:if={E2ERateData} matrix-data={E2ERateData}
+                        style="display: contents;"></c-custom-matrix>
+                </div>
+            </div>
+    </div>
+</template>
