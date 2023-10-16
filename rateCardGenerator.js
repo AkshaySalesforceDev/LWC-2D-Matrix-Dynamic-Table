@@ -1,6 +1,11 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { getObjectInfo, getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
+import getLMSolutionTypePicklistValues from '@salesforce/apex/XBRateCardGeneratorController.getLMSolutionTypePicklistValues';
+import getE2ERateCards from '@salesforce/apex/XBRateCardGeneratorController.getE2ERateCards';
+import QUOTE_OBJECT from '@salesforce/schema/Quote';
+import QUOTE_OBJECT from '@salesforce/schema/Quote';
+
 
 // const variable to store Quote Record Fields
 const QUOTE_FIELDS = [
@@ -24,16 +29,6 @@ const eventHandlerMap = {
     handleLMSolutionType: 'LMSolutionValue',
     handleQuoteDate: 'QuoteDateValue'
 }
-
-//import methods from controller
-import getLMSolutionTypePicklistValues from '@salesforce/apex/XBRateCardGeneratorController.getLMSolutionTypePicklistValues';
-import getE2ERateCards from '@salesforce/apex/XBRateCardGeneratorController.getE2ERateCards';
-
-// Import Quote object info
-import QUOTE_OBJECT from '@salesforce/schema/Quote';
-
-// Import Rate Card object info
-import XB_Rate_Card from '@salesforce/schema/XB_Rate_Card__c';
 
 export default class RateCardGenerator extends LightningElement {
 
